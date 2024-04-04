@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add a New Book</title>        
+        <link rel="stylesheet"  href="{% static 'style.css' %}">  
+      </head>
+<body>
+    <header>
+        <div class="header-container">
+        {% if request.method == 'POST' %}
+          <h1>Add a New Book</h1>
+        {% else %}
+          <h1>Edit the Book Data</h1>
+        {% endif %}
+        </div>
+        <p></p>
+    </header>
+{% if form.errors %}
+    <p style="color: red;">Please correct the errors below:</p>
+    <ul>
+        {% for error in form.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% if request.method == 'POST' %}
+    <form class="form-container" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Book</button>
+    </form>
+{% else %}
+    <form class="form-container" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="pk" value="{{ book.pk }}">
+        <button type="submit">Save Book</button>
+    </form>
+{% endif %}
+</body>
+</html>
