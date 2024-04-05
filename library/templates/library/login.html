@@ -11,12 +11,20 @@
     <header>
         <div class="header-container">
           <h1>Login</h1>
-          <p>Login now to access all features like adding and removing books.</p>
         </div>
         <p></p>
     </header>
-    <form method="post">
-        {% csrf_token %}  {{ form.as_p }}  <button type="submit">Login</button>
+    {% if error_message %}
+    <div class="header-container">
+    {{ error_message }}
+    </div>
+    {% endif %}
+    <form class="form-container" method="post">
+        {% csrf_token %}  {{ form.as_p }}  <button class="login-btn" type="submit">Login</button>
     </form>
+    <div class = "centered">
+        <p>New Here? Create a new account and enjoy!</p>
+        <a href="{% url 'register' %}"><button class="register-btn">Create new account</button></a>
+    </div>    
 </body>
 </html>

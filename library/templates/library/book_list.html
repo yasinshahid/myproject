@@ -10,7 +10,7 @@
 <body>
   <header>
     <div class="header-container">
-      <h1>AZM Bookshelf</h1>
+      <h1>Your Bookshelf</h1>
       {% if request.user.is_authenticated %}
       <p class="username-display">Welcome, {{ request.user.username }}!</p>
       {% endif %}
@@ -35,7 +35,6 @@
             <th>Author</th>
             <th>Publication Date</th>
             <th>Genre</th>
-            <th>User</th>
             <th class="actions">Actions</th>
           </tr>
         </thead>
@@ -46,7 +45,6 @@
             <td>{{ book.author }}</td>
             <td>{{ book.publication_date }}</td>
             <td>{{ book.genre }}</td>
-            <td>{{ book.user }}</td>
             <td class="actions">
               <a href="{% url 'book_edit' book.pk %}"><button class="edit-btn">Edit</button></a>
               <form action="{% url 'book_delete' book.pk %}" method="post">
